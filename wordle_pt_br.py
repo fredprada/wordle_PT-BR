@@ -1,5 +1,6 @@
 #pip install Unidecode
 import random
+from re import S
 import unidecode
 import string
 
@@ -8,7 +9,8 @@ all_answers = []
 for item in all_answers_accents:
   all_answers.append(unidecode.unidecode(item))
 tries = []
-
+status = []
+status_final = []
 
 def alphabet():
   global alphabet_answer
@@ -19,9 +21,9 @@ def alphabet():
     for words in tries:
       for letter in words:
         if letter == i:
-          i = ' '
+          i = '_'
     alphabet_answer.append(i)
-  alpha = '  '.join([str(item) for item in alphabet_answer])
+  alpha = ' '.join([str(item) for item in alphabet_answer])
   print(alpha)
 
 
@@ -36,7 +38,7 @@ def checking_your_try(your_try,answer):
     else:
       checking_try.append("x")
   checked = ' '.join([str(item) for item in checking_try])
-  print(checked+"\n\n")
+  print(checked+"\n")
 
 
 def showing_your_try(word):
@@ -44,16 +46,23 @@ def showing_your_try(word):
   print("\n"+show)
 
 
-def status_chart(checked):
-  global status
-  status.append(checked)
-
+def final_check(checked):
+  global status_final
+  check_final = []
+  for i in range(len(checked)):
+    if checked[i] == "v":
+      check_final.append("v")
+    elif checked[i] == "o":
+      check_final.append("o")
+    else:
+      check_final.append("_")
+  check_final = ''.join([str(item) for item in check_final])
+  status_final.append(check_final)
 
 
 #This is the game without the accent in the words
 answer = random.choice(all_answers).lower()
 range_size = 6
-status = []
 
 #print("a resposta é: "+answer+"\n\n")
 for i in range(range_size):
@@ -65,14 +74,15 @@ for i in range(range_size):
     showing_your_try(your_try)
   checking_your_try(your_try,answer)
   print(alphabet())
+  final_check(checked)
   if your_try == answer:
     print('Parabéns, você acertou!! :D')
     break
   print(80*'-')
-  status_chart(checked)
 
 if your_try != answer:
   print(f"A palavra era {answer}\nTente de novo :'(")
 
 print('\nSeu status foi:')
-print(f'{status[0]:1}\n{status[1]:1}\n{status[2]:1}\n{status[3]:1}\n{status[4]:1}\n{status[5]:1}')
+for i in range(0,len(status_final)):
+  print(f"{status_final[i]}")
