@@ -16,7 +16,7 @@ for item in all_answers_accents:
 
 
 def alphabet(your_try):
-  """Function that clears the letters already used"""
+  """Function that shows the entire alphabet and clears the letters already used"""
   global alphabet_answer
   tries.append(your_try)
   alphabet_answer = []
@@ -83,7 +83,7 @@ for i in range(game_lenght):
     your_try = input(str(f"{i+1} - ")).lower()
     showing_your_try(your_try)
   checking_your_try(your_try,answer)
-  print(f"{alphabet(your_try)}+\n")
+  print(f"{alphabet(your_try)}\n")
   final_check(checked)
   if your_try == answer:
     print('Parabéns, você acertou!! :D')
