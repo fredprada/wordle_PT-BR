@@ -52,8 +52,11 @@ def checking_your_try(your_try,answer):
 
 def showing_your_try(word):
   """Function that shows the letters you have tried"""
-  show = (f'{word[0]:2}{word[1]:2}{word[2]:2}{word[3]:2}{word[4]:2}')
-  print("\n"+show)
+  if len(word) != 5:
+    print("Escreva uma palavra de 5 letras!")
+  else:
+    show = (f'{word[0]:2}{word[1]:2}{word[2]:2}{word[3]:2}{word[4]:2}')
+    print("\n"+show)
 
 
 def final_check(checked):
@@ -71,16 +74,16 @@ def final_check(checked):
   status_final.append(check_final)
 
 # Main program
-answer = random.choice(all_answers).lower()
+#answer = random.choice(all_answers).lower()
+answer = ("campo")
 game_lenght = 6
 
-#print("a resposta é: "+answer+"\n\n") #this code displays the answer, to perform some testing
+#print("a resposta é: "+answer+"\n\n\n\n\n") #this code displays the answer, to perform some testing
 for i in range(game_lenght):
   your_try = input(str(f"Tentativa {i+1} - ")).lower()
   showing_your_try(your_try)
-  while len(your_try) != 5:
-    print("\nEscreva uma palavra de 5 letras")
-    your_try = input(str(f"{i+1} - ")).lower()
+  if len(your_try) != 5:
+    your_try = input(str(f"Tentativa {i+1} - ")).lower()
     showing_your_try(your_try)
   checking_your_try(your_try,answer)
   print(f"{alphabet(your_try)}\n")
